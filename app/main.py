@@ -24,16 +24,12 @@ app = FastAPI(
 )
 
 
+# Allow Vercel deployments + localhost development
 app.add_middleware(
     CORSMiddleware,
+    allow_origin_regex=r"https://daily-task-manager-v2-.*\.vercel\.app",
     allow_origins=[
-        "http://localhost:5173",
-
-        # Production Vercel domain
-        "https://daily-task-manager-v2-mrek.vercel.app",
-
-        # Vercel preview deployments
-        "https://daily-task-manager-v2-mrek-naywin-thukhas-projects.vercel.app",
+        "http://localhost:5173"
     ],
     allow_credentials=True,
     allow_methods=["*"],
