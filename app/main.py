@@ -17,30 +17,33 @@ from app.core.exception import (
     task_not_found_handler
 )
 
+
 app = FastAPI(
     title="Daily Task Manager",
     version="1.0.0"
 )
 
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-
         "http://localhost:5173",
 
+        # Production Vercel domain
         "https://daily-task-manager-v2-mrek.vercel.app",
 
+        # Vercel preview deployments
         "https://daily-task-manager-v2-mrek-naywin-thukhas-projects.vercel.app",
-       "https://daily-task-manager-v2-mrek-1cvd28vju-naywin-thukhas-projects.vercel.app",
-
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+
 app.include_router(tasks.router)
 app.include_router(dashboard.router)
+
 
 app.add_exception_handler(
     TaskNotFoundException,
