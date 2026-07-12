@@ -251,3 +251,9 @@ searchInput.addEventListener("input", () => {
     loadTasks();
   }, 300);
 });
+
+
+window.getToken = async () => {
+    const token = await auth.currentUser.getIdToken();
+    console.log(token);
+};
