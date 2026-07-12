@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Log in — Daily Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="page page-narrow">
+
+  <header class="masthead masthead-center">
+    <span class="masthead-mark">DL</span>
+    <div class="masthead-text">
+      <h1>Daily Ledger</h1>
+      <p class="masthead-sub">a running account of what needs doing</p>
+    </div>
+  </header>
+
+  <section class="sheet auth-sheet">
+    <h2 class="auth-heading">Log in</h2>
+
+    <form id="loginForm" class="auth-form" novalidate>
+      <label class="field">
+        <span class="field-label">Email</span>
+        <input type="email" id="loginEmail" required autocomplete="email" />
+      </label>
+      <label class="field">
+        <span class="field-label">Password</span>
+        <input type="password" id="loginPassword" required autocomplete="current-password" />
+      </label>
+      <p class="form-error" id="loginError" hidden></p>
+      <button type="submit" class="btn-primary">Log in</button>
+    </form>
+
+    <p class="auth-switch">New here? <a href="signup.html">Create an account</a></p>
+  </section>
+
+</div>
+
+<script type="module" src="login.js"></script>
+</body>
+</html>

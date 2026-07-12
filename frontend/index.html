@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Daily Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="page">
+
+  <header class="masthead">
+    <div class="masthead-left">
+      <span class="masthead-mark">DL</span>
+      <div class="masthead-text">
+        <h1>Daily Ledger</h1>
+        <p class="masthead-sub">a running account of what needs doing</p>
+      </div>
+    </div>
+    <div class="masthead-right" id="userBar" hidden>
+      <span id="userEmail" class="user-email"></span>
+      <button id="logoutBtn" class="btn-ghost">Sign out</button>
+    </div>
+  </header>
+
+  <section id="appSection" class="sheet app-sheet" hidden>
+
+    <form id="addForm" class="add-row" novalidate>
+      <span class="add-row-glyph">+</span>
+      <input type="text" id="addTitle" placeholder="Add an entry&hellip;" maxlength="255" required />
+      <input type="text" id="addDescription" placeholder="Details (optional)" maxlength="500" />
+      <button type="submit" class="btn-primary btn-add">Enter</button>
+    </form>
+
+    <div class="toolbar">
+      <div class="filter-tabs" role="tablist">
+        <button class="filter-tab is-active" data-filter="all">All</button>
+        <button class="filter-tab" data-filter="open">Open</button>
+        <button class="filter-tab" data-filter="done">Done</button>
+      </div>
+      <label class="search-field">
+        <span class="search-icon" aria-hidden="true">&#8981;</span>
+        <input type="search" id="searchInput" placeholder="Search entries" />
+      </label>
+    </div>
+
+    <p class="form-error" id="taskError" hidden></p>
+
+    <div class="ledger" id="ledger">
+      <div class="ledger-head">
+        <span class="col-idx">No.</span>
+        <span class="col-check">Done</span>
+        <span class="col-title">Entry</span>
+        <span class="col-actions">&nbsp;</span>
+      </div>
+      <ol class="ledger-body" id="ledgerBody"></ol>
+      <p class="ledger-empty" id="ledgerEmpty" hidden>Nothing on the books. Add your first entry above.</p>
+      <p class="ledger-loading" id="ledgerLoading">Opening the ledger&hellip;</p>
+    </div>
+
+  </section>
+
+  <p class="ledger-loading" id="authChecking">Checking your session&hellip;</p>
+
+  <footer class="foot">
+    <span id="footStatus"></span>
+  </footer>
+
+</div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
