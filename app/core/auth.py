@@ -8,35 +8,50 @@ from firebase_admin import auth
 from app.database.dependencies import get_db
 from app.models.user import User
 
-security = HTTPBearer()
+
+security = HTTPBearer(
+    auto_error=False
+)
 
 
 async def get_current_user(
-    credentials: HTTPAuthorizationCredentials = Depends(security),
+    credentials: HTTPAuthorizationCredentials | None = Depends(security),
     db: Session = Depends(get_db)
 ):
+
+    if credentials is None:
+        raise HTTPException(
+            status_code=401,
+            detail="Missing authentication token"
+        )
+
+
     token = credentials.credentials
+
 
     try:
         decoded_token = auth.verify_id_token(token)
 
-    except Exception:
+    except Exception as e:
+        print(e)
+
         raise HTTPException(
             status_code=401,
             detail="Invalid authentication token"
         )
 
+
     firebase_uid = decoded_token["uid"]
     email = decoded_token.get("email")
 
-    # Check if user already exists in MySQL
+
     user = (
         db.query(User)
         .filter(User.firebase_uid == firebase_uid)
         .first()
     )
 
-    # If first login, create user automatically
+
     if not user:
 
         username = email.split("@")[0]
@@ -50,5 +65,6 @@ async def get_current_user(
         db.add(user)
         db.commit()
         db.refresh(user)
+
 
     return user
