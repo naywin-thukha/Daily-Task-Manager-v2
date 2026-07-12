@@ -1,8 +1,8 @@
 from fastapi import FastAPI, Depends
+from fastapi.middleware.cors import CORSMiddleware
 
 from sqlalchemy.orm import Session
 
-from app.database.database import Base, engine
 from app.database.dependencies import get_db
 
 import app.models
@@ -11,34 +11,36 @@ import app.core.firebase
 from app.core.auth import get_current_user
 from app.models.user import User
 from app.routers import tasks
-
 from app.routers import dashboard
 from app.core.exception import (
     TaskNotFoundException,
     task_not_found_handler
 )
-from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
     title="Daily Task Manager",
     version="1.0.0"
 )
 
-app.include_router(tasks.router)
-app.include_router(dashboard.router)
-app.add_exception_handler(
-    TaskNotFoundException,
-    task_not_found_handler
-)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:5173"
+        "http://localhost:5173",
+        "https://daily-task-manager-v2-mrek-42mzb3xky-naywin-thukhas-projects.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(tasks.router)
+app.include_router(dashboard.router)
+
+app.add_exception_handler(
+    TaskNotFoundException,
+    task_not_found_handler
+)
+
 
 @app.get("/")
 def root():
