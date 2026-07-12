@@ -25,8 +25,13 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+
         "http://localhost:5173",
-        "https://daily-task-manager-v2-mrek-42mzb3xky-naywin-thukhas-projects.vercel.app",
+
+        "https://daily-task-manager-v2-mrek.vercel.app",
+
+        "https://daily-task-manager-v2-mrek-naywin-thukhas-projects.vercel.app",
+
     ],
     allow_credentials=True,
     allow_methods=["*"],
