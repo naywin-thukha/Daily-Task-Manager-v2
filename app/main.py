@@ -31,6 +31,7 @@ app.add_middleware(
         "https://daily-task-manager-v2-mrek.vercel.app",
 
         "https://daily-task-manager-v2-mrek-naywin-thukhas-projects.vercel.app",
+       "https://daily-task-manager-v2-mrek-1cvd28vju-naywin-thukhas-projects.vercel.app",
 
     ],
     allow_credentials=True,
